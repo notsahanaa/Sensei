@@ -20,8 +20,8 @@ const DashboardLayout = ({ children }) => {
         `}
       >
         {/* Header with Mobile Menu and Theme */}
-        <header className="sticky top-0 z-30 bg-[var(--bg)] border-b border-[var(--container-medium)] px-6 py-4">
-          <div className="flex items-center justify-between">
+        <header className="sticky top-0 z-30 bg-[var(--bg)] border-b border-[var(--container-medium)] px-6 h-16 flex items-center">
+          <div className="w-full flex items-center justify-between">
             {/* Mobile Burger Menu (only on mobile) */}
             <button
               onClick={toggleNav}

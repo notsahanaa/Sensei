@@ -44,7 +44,7 @@ const Navbar = ({ isOpen, toggleNav }) => {
         `}
       >
         {/* Logo & Toggle */}
-        <div className={`border-b border-[var(--container-medium)] ${isOpen ? 'px-6 py-4' : 'py-4'} ${isOpen ? 'flex items-center justify-between' : 'flex justify-center'}`}>
+        <div className={`border-b border-[var(--container-medium)] h-16 ${isOpen ? 'px-6' : ''} ${isOpen ? 'flex items-center justify-between' : 'flex items-center justify-center'}`}>
           {isOpen ? (
             <>
               <img

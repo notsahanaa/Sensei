@@ -11,7 +11,7 @@ const Dashboard = () => {
       {hasProjects ? (
         // Dashboard with projects (TODO: Implement later)
         <div>
-          <h1 className="text-[var(--font-heading-l)] font-medium text-[var(--text-primary)]">
+          <h1 className="text-2xl font-medium text-[var(--text-primary)]">
             Dashboard
           </h1>
         </div>
@@ -25,7 +25,7 @@ const Dashboard = () => {
             </h1>
 
             {/* Description */}
-            <p className="text-[var(--font-body-m)] text-[var(--text-secondary)] mb-8 leading-relaxed">
+            <p className="text-sm text-[var(--text-secondary)] mb-8 leading-relaxed">
               Projects are time-bound activities with clear outcomes. Unlike habits, projects require you to work on different activities on a day-to-day basis and to make sure the activities matter to your end-result. Sensei helps you break down your projects into daily activities and help you understand if they move the needle.
             </p>
 
