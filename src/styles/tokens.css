@@ -1,0 +1,68 @@
+/* Sensei Design System Tokens */
+
+:root {
+  /* Colors - Light Mode */
+  --bg: #FFFFFF;
+  --container-subtle: #F7FAFF;
+  --container-medium: rgba(209, 219, 236, 0.4);
+  --container-intense: #D1DBEC;
+  --text-primary: #000000;
+  --text-secondary: rgba(0, 0, 0, 0.6);
+  --accent-primary: #3F58AB;
+  --accent-secondary: #8E92ED;
+  --accent-tertiary: #2CBFC9;
+  --accent-quaternary: #29A0F4;
+}
+
+[data-theme="dark"] {
+  /* Colors - Dark Mode */
+  --bg: #0C0C0C;
+  --container-subtle: #161616;
+  --container-medium: rgba(52, 52, 52, 0.4);
+  --container-intense: #343434;
+  --text-primary: #FFFFFF;
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --accent-primary: #879FC8;
+  --accent-secondary: #A6AAF4;
+  --accent-tertiary: #96F7FE;
+  --accent-quaternary: #34A7F8;
+}
+
+/* Typography */
+:root {
+  --font-family: 'EB Garamond', serif;
+
+  /* Font Sizes */
+  --font-title: 32px;
+  --font-heading-l: 24px;
+  --font-heading-m: 20px;
+  --font-heading-s: 16px;
+  --font-body-m: 14px;
+  --font-body-s: 12px;
+
+  /* Font Weights */
+  --weight-medium: 500;
+  --weight-regular: 400;
+}
+
+/* Spacing */
+:root {
+  --container-margin: 32px;
+  --navbar-height: 56px;
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  :root {
+    --container-margin: 16px;
+  }
+}
