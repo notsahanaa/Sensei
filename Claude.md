@@ -8,7 +8,7 @@ Small, self-employed builders and creators who juggle multiple projects.
 ### Goal
 Sensei helps creators and builders turn ideas into action. It organizes daily work, tracks consistency and project progress — so users can consistently make meaningful progress on their projects.
 
-### Main Pages / Navigation
+## Main Pages / Navigation
 
 - **Create Project** - Create a project and define the key domains tasks will be segregated into
 - **Dashboard** - Show all current projects and tasks related to those projects
@@ -17,23 +17,27 @@ Sensei helps creators and builders turn ideas into action. It organizes daily wo
 - **Progress** - Auto-organizing progress page that shows milestones completed so far and what activities were completed under each milestone
 - **Sidebar Menu** - Shows home, active projects & archived projects
 
-### Features
+---
 
-#### 0. Starting
+## Features
 
-##### 0.1 Sign Up & Onboarding
+### 0. Starting
+
+#### 0.1 Sign Up & Onboarding
 - Sign up / create an account
 - Quick 3-slide visual guide introducing Sensei's workflow and benefits
 
-##### 0.2 Creating a new Project
+#### 0.2 Creating a new Project
 - Users create the project they will focus on and its domains
 
-##### 0.3 Dashboard
+#### 0.3 Dashboard
 - Shows all the projects the user is currently working on
 
-#### 1. Tasks
+---
 
-##### 1.1 Daily Tasks: Setting Task
+### 1. Tasks
+
+#### 1.1 Daily Tasks: Setting Task
 - At the start of the day, Sensei converts user's unstructured input into structured tasks
 - If there are backlogged tasks, Sensei asks the user if they want to schedule it today
 - Each task includes:
@@ -50,49 +54,58 @@ Sensei helps creators and builders turn ideas into action. It organizes daily wo
 - Users can edit, delete, or add tasks manually
 - "Today" page shows the date and progress bar with hours of work left label
 
-##### 1.2 Daily Tasks: Focus Mode
+#### 1.2 Daily Tasks: Focus Mode
 - Click a task to start a focus timer
 - Timer counts up to the set time and continues if the user is still working
 - On completion, user confirms whether the task and time target were met; data is stored
 - Completed tasks appear grayed out in the Today page
 
-##### 1.3 Daily Tasks: Completing Tasks
+#### 1.3 Daily Tasks: Completing Tasks
 - Checkmark a task to complete it
 - Add time taken, work completed, version to check in
 - If user has not manually completed, Sensei asks to check-in by showing each task and asking which ones they completed and how far
 - Users confirm completed tasks or edit if outcomes differ from planned targets
 - Users can provide a text dump of what they accomplished, which Sensei parses into structured completion data
 
-#### 2. Productivity
+---
 
-##### 2.1 Consistency Map & Productivity UI
+### 2. Productivity
+
+#### 2.1 Consistency Map & Productivity UI
 - **Monthly calendar heatmap**: shows days user worked and time spent (every 2 hours = 10% shade change; starts at 30%)
 - **Weekly bar chart**: visualizes time spent per project (split by domain)
 - **Future**: input vs outcome ratio, plan vs completion analysis
 - Tasks completed that day, shown as task cards
 
-##### 2.2 Future: Taking Breaks / Non-Work Days
+#### 2.2 Future: Taking Breaks / Non-Work Days
 - If the user does not work on a day, Sensei asks what they did instead (categories: rest, fun, hobbies, day job)
 - Calendar shows these categories for non-work days so users see justified breaks without guilt
 
-#### 3. Progress
+---
 
-##### 3.1 Project Progress / Kanban
+### 3. Progress
+
+#### 3.1 Project Progress / Kanban
 - Sensei groups tasks completed into milestones
 - Project Progress page will contain a kanban with all milestones reached in a domain
 - On clicking a milestone, user can see all the tasks completed under it, the dates completed and the metrics associated
 - **Future**: Sensei will suggest where tasks were under- or over-performed and provide insights on efficiency and growth
 
-#### 4. Profile
+---
 
-##### 4.1 Account Management
+### 4. Profile
+
+#### 4.1 Account Management
 - Email, password, notification settings
 - Sign out
 - Delete account
 
-#### 5. Insights (Future Feature)
+---
+
+### 5. Insights (Future Feature)
 - AI-driven insights on work patterns and productivity
 - Advice on task efficiency, time allocation, and prioritization
+
 
 ---
 
@@ -184,9 +197,9 @@ Sensei helps creators and builders turn ideas into action. It organizes daily wo
 **Scale**: 4-point
 
 #### Container Spacing
-- **Sidebar open**: 25%
+- **Sidebar open**: 24%
 - **Normal Container**: 60%
-- **Normal Container**: 40%
+- **Small Container**: 40%
 - **Pop-up Container**: 84%
 
 ---
