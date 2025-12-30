@@ -5,7 +5,7 @@ import SignUp from './components/auth/SignUp'
 import ForgotPassword from './components/auth/ForgotPassword'
 import Dashboard from './pages/Dashboard'
 import CreateProject from './pages/CreateProject'
-import GeminiTest from './pages/GeminiTest'
+import TestGemini from './pages/TestGemini'
 
 export default function AppRouter() {
   return (
@@ -25,8 +25,8 @@ export default function AppRouter() {
         {/* Create Project */}
         <Route path="/create-project" element={<CreateProject />} />
 
-        {/* Gemini Test */}
-        <Route path="/gemini-test" element={<GeminiTest />} />
+        {/* Test Gemini */}
+        <Route path="/test-gemini" element={<TestGemini />} />
 
         {/* Catch all - redirect to landing */}
         <Route path="*" element={<Navigate to="/" replace />} />
