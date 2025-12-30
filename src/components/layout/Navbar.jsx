@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { supabase } from '../../lib/supabase'
+import ProjectCreationModal from '../ui/ProjectCreationModal'
 
 const Navbar = ({ isOpen, toggleNav }) => {
   const navigate = useNavigate()
@@ -8,6 +9,7 @@ const Navbar = ({ isOpen, toggleNav }) => {
   const [user, setUser] = useState(null)
   const [projects, setProjects] = useState([]) // TODO: Fetch from Supabase
   const [archivedProjects, setArchivedProjects] = useState([]) // TODO: Fetch from Supabase
+  const [isProjectModalOpen, setIsProjectModalOpen] = useState(false)
 
   // Get user info
   useEffect(() => {
@@ -111,7 +113,7 @@ const Navbar = ({ isOpen, toggleNav }) => {
                 </h3>
                 {projects.length === 0 ? (
                   <button
-                    onClick={() => navigate('/create-project')}
+                    onClick={() => setIsProjectModalOpen(true)}
                     className="
                       w-full flex items-center gap-3 px-4 py-3 rounded-lg
                       text-[var(--accent-primary)] hover:bg-[var(--container-medium)]
@@ -217,6 +219,16 @@ const Navbar = ({ isOpen, toggleNav }) => {
           </div>
         )}
       </aside>
+
+      {/* Project Creation Modal */}
+      <ProjectCreationModal
+        isOpen={isProjectModalOpen}
+        onClose={() => setIsProjectModalOpen(false)}
+        onComplete={() => {
+          // TODO: Handle project creation
+          setIsProjectModalOpen(false)
+        }}
+      />
     </>
   )
 }

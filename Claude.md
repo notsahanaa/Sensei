@@ -181,8 +181,8 @@ Sensei helps creators and builders turn ideas into action. It organizes daily wo
 - **Where**: Section Heading
 
 ##### Body Text M
-- **Web**: 14px (400)
-- **Mobile**: 14px (400)
+- **Web**: 16px (400)
+- **Mobile**: 16px (400)
 - **Where**: Regular content, tab labels, small section headings
 
 ##### Body Text S

@@ -1,10 +1,13 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import DashboardLayout from '../components/layout/DashboardLayout'
 import Button from '../components/ui/Button'
+import ProjectCreationModal from '../components/ui/ProjectCreationModal'
 
 const Dashboard = () => {
   const navigate = useNavigate()
   const hasProjects = false // TODO: Check if user has projects
+  const [isProjectModalOpen, setIsProjectModalOpen] = useState(false)
 
   return (
     <DashboardLayout>
@@ -32,7 +35,7 @@ const Dashboard = () => {
             {/* CTA Button */}
             <div className="max-w-xs">
               <Button
-                onClick={() => navigate('/create-project')}
+                onClick={() => setIsProjectModalOpen(true)}
                 variant="primary"
               >
                 Add New Project
@@ -41,6 +44,16 @@ const Dashboard = () => {
           </div>
         </div>
       )}
+
+      {/* Project Creation Modal */}
+      <ProjectCreationModal
+        isOpen={isProjectModalOpen}
+        onClose={() => setIsProjectModalOpen(false)}
+        onComplete={() => {
+          // TODO: Handle project creation
+          setIsProjectModalOpen(false)
+        }}
+      />
     </DashboardLayout>
   )
 }
