@@ -1,0 +1,168 @@
+/* DatePicker Custom Styles - Matching Sensei Design System */
+
+/* Wrapper */
+.date-picker-wrapper {
+  display: inline-block;
+}
+
+/* Popper container */
+.date-picker-popper {
+  z-index: 9999;
+}
+
+/* Calendar Container */
+.react-datepicker {
+  font-family: 'EB Garamond', serif !important;
+  background-color: var(--container-intense) !important;
+  border: 1px solid var(--container-medium) !important;
+  border-radius: 8px !important;
+  padding: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Header */
+.react-datepicker__header {
+  background-color: var(--container-intense) !important;
+  border-bottom: 1px solid var(--container-medium) !important;
+  padding: 12px 0 !important;
+  border-radius: 0 !important;
+}
+
+/* Month/Year dropdown */
+.react-datepicker__current-month {
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  color: var(--text-primary) !important;
+  margin-bottom: 8px !important;
+  font-family: 'EB Garamond', serif !important;
+}
+
+/* Navigation arrows */
+.react-datepicker__navigation {
+  top: 16px !important;
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: var(--text-secondary) !important;
+}
+
+.react-datepicker__navigation:hover .react-datepicker__navigation-icon::before {
+  border-color: var(--text-primary) !important;
+}
+
+/* Day names (S M T W T F S) */
+.react-datepicker__day-names {
+  display: flex !important;
+  justify-content: space-around !important;
+  margin-top: 8px !important;
+}
+
+.react-datepicker__day-name {
+  color: var(--text-secondary) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  width: 32px !important;
+  line-height: 32px !important;
+  margin: 0 !important;
+  font-family: 'EB Garamond', serif !important;
+}
+
+/* Week */
+.react-datepicker__week {
+  display: flex !important;
+  justify-content: space-around !important;
+}
+
+/* Day cells */
+.react-datepicker__day {
+  color: var(--text-primary) !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  width: 32px !important;
+  height: 32px !important;
+  line-height: 32px !important;
+  margin: 2px !important;
+  border-radius: 4px !important;
+  transition: all 0.2s ease !important;
+  font-family: 'EB Garamond', serif !important;
+}
+
+.react-datepicker__day:hover {
+  background-color: var(--container-medium) !important;
+  border-radius: 4px !important;
+}
+
+/* Selected day */
+.react-datepicker__day--selected {
+  background-color: var(--accent-primary) !important;
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+}
+
+.react-datepicker__day--selected:hover {
+  background-color: var(--accent-primary) !important;
+  opacity: 0.9 !important;
+}
+
+/* Today */
+.react-datepicker__day--today {
+  background-color: var(--container-medium) !important;
+  font-weight: 500 !important;
+}
+
+/* Outside month */
+.react-datepicker__day--outside-month {
+  color: var(--text-secondary) !important;
+  opacity: 0.4 !important;
+}
+
+/* Disabled days */
+.react-datepicker__day--disabled {
+  color: var(--text-secondary) !important;
+  opacity: 0.3 !important;
+  cursor: not-allowed !important;
+}
+
+.react-datepicker__day--disabled:hover {
+  background-color: transparent !important;
+}
+
+/* Month container */
+.react-datepicker__month-container {
+  float: none !important;
+}
+
+.react-datepicker__month {
+  margin: 8px 0 0 0 !important;
+}
+
+/* Triangle pointer */
+.react-datepicker__triangle {
+  display: none !important;
+}
+
+/* Today and Clear buttons */
+.react-datepicker__today-button {
+  background-color: var(--container-subtle) !important;
+  color: var(--accent-primary) !important;
+  border-top: 1px solid var(--container-medium) !important;
+  padding: 8px !important;
+  font-family: 'EB Garamond', serif !important;
+  font-size: 14px !important;
+  cursor: pointer !important;
+  border-radius: 0 0 8px 8px !important;
+}
+
+.react-datepicker__today-button:hover {
+  background-color: var(--container-medium) !important;
+}
+
+/* Keyboard selected */
+.react-datepicker__day--keyboard-selected {
+  background-color: var(--container-medium) !important;
+  color: var(--text-primary) !important;
+}
+
+.react-datepicker__day--keyboard-selected:hover {
+  background-color: var(--accent-primary) !important;
+}

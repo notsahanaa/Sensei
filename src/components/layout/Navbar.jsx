@@ -2,14 +2,17 @@ import { useState, useEffect } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { supabase } from '../../lib/supabase'
 import ProjectCreationModal from '../ui/ProjectCreationModal'
+import { useProjectStore } from '../../stores/useProjectStore'
 
 const Navbar = ({ isOpen, toggleNav }) => {
   const navigate = useNavigate()
   const location = useLocation()
   const [user, setUser] = useState(null)
-  const [projects, setProjects] = useState([]) // TODO: Fetch from Supabase
-  const [archivedProjects, setArchivedProjects] = useState([]) // TODO: Fetch from Supabase
+  const [archivedProjects, setArchivedProjects] = useState([])
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false)
+
+  // Use Zustand store for projects
+  const { projects, fetchProjects } = useProjectStore()
 
   // Get user info
   useEffect(() => {
@@ -17,6 +20,11 @@ const Navbar = ({ isOpen, toggleNav }) => {
       setUser(user)
     })
   }, [])
+
+  // Fetch projects on mount
+  useEffect(() => {
+    fetchProjects()
+  }, [fetchProjects])
 
   const handleLogout = async () => {
     await supabase.auth.signOut()
@@ -111,7 +119,24 @@ const Navbar = ({ isOpen, toggleNav }) => {
                 <h3 className="text-xs font-medium text-[var(--text-secondary)] uppercase mb-3 px-4">
                   All Projects
                 </h3>
-                {projects.length === 0 ? (
+                <div className="space-y-1">
+                  {/* Project List */}
+                  {projects.map((project) => (
+                    <Link
+                      key={project.id}
+                      to={`/project/${project.id}`}
+                      className="
+                        flex items-center gap-3 px-4 py-3 rounded-lg
+                        text-[var(--text-primary)] hover:bg-[var(--container-medium)]
+                        transition-colors duration-200
+                      "
+                    >
+                      <div className="w-2 h-2 rounded-full bg-[var(--accent-primary)]" />
+                      <span className="text-sm">{project.name}</span>
+                    </Link>
+                  ))}
+
+                  {/* Add Project Button */}
                   <button
                     onClick={() => setIsProjectModalOpen(true)}
                     className="
@@ -125,24 +150,7 @@ const Navbar = ({ isOpen, toggleNav }) => {
                     </svg>
                     <span className="text-sm font-medium">Add Project</span>
                   </button>
-                ) : (
-                  <div className="space-y-1">
-                    {projects.map((project) => (
-                      <Link
-                        key={project.id}
-                        to={`/project/${project.id}`}
-                        className="
-                          flex items-center gap-3 px-4 py-3 rounded-lg
-                          text-[var(--text-primary)] hover:bg-[var(--container-medium)]
-                          transition-colors duration-200
-                        "
-                      >
-                        <div className="w-2 h-2 rounded-full bg-[var(--accent-primary)]" />
-                        <span className="text-sm">{project.name}</span>
-                      </Link>
-                    ))}
-                  </div>
-                )}
+                </div>
               </div>
 
               {/* Divider */}
@@ -225,8 +233,8 @@ const Navbar = ({ isOpen, toggleNav }) => {
         isOpen={isProjectModalOpen}
         onClose={() => setIsProjectModalOpen(false)}
         onComplete={() => {
-          // TODO: Handle project creation
           setIsProjectModalOpen(false)
+          fetchProjects() // Refresh projects list
         }}
       />
     </>
