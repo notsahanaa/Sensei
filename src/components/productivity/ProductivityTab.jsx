@@ -2,6 +2,7 @@ import { useState, useEffect, forwardRef } from 'react'
 import { Calendar, ChevronLeft, ChevronRight, Target } from 'lucide-react'
 import DatePicker from '../ui/DatePicker'
 import { supabase } from '../../lib/supabase'
+import { formatLocalDate, getMonthStart, getMonthEnd } from '../../utils/dateUtils'
 
 // Custom input component for DatePicker (calendar icon button)
 const CalendarButton = forwardRef(({ value, onClick }, ref) => (
@@ -47,16 +48,16 @@ const ProductivityTab = ({ projectId }) => {
   const fetchMonthData = async () => {
     setIsLoading(true)
 
-    const startOfMonth = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), 1)
-    const endOfMonth = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth() + 1, 0)
+    const startOfMonth = getMonthStart(selectedMonth)
+    const endOfMonth = getMonthEnd(selectedMonth)
 
     try {
       const { data, error } = await supabase
         .from('task_instances')
         .select('*')
         .eq('project_id', projectId)
-        .gte('scheduled_date', startOfMonth.toISOString().split('T')[0])
-        .lte('scheduled_date', endOfMonth.toISOString().split('T')[0])
+        .gte('scheduled_date', formatLocalDate(startOfMonth))
+        .lte('scheduled_date', formatLocalDate(endOfMonth))
 
       if (error) throw error
 
@@ -71,7 +72,7 @@ const ProductivityTab = ({ projectId }) => {
 
   const fetchDayTasks = async () => {
     try {
-      const dateStr = selectedDate.toISOString().split('T')[0]
+      const dateStr = formatLocalDate(selectedDate)
       const { data, error } = await supabase
         .from('task_instances')
         .select(`
@@ -129,7 +130,7 @@ const ProductivityTab = ({ projectId }) => {
 
   // Get hours for a specific date
   const getHoursForDate = (date) => {
-    const dateStr = date.toISOString().split('T')[0]
+    const dateStr = formatLocalDate(date)
     const tasksOnDate = monthData.filter(t => t.scheduled_date === dateStr && t.status === 'completed')
     const hours = tasksOnDate.reduce((sum, task) => sum + ((task.actual_time_spent || 0) / 60), 0)
     return hours

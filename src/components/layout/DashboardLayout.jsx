@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Navbar from './Navbar'
 import ThemeToggle from '../ui/ThemeToggle'
 
-const DashboardLayout = ({ children }) => {
+const DashboardLayout = ({ children, title, headerRight }) => {
   const [navOpen, setNavOpen] = useState(true)
 
   const toggleNav = () => setNavOpen(!navOpen)
@@ -22,22 +22,30 @@ const DashboardLayout = ({ children }) => {
         {/* Header with Mobile Menu and Theme */}
         <header className="sticky top-0 z-30 bg-[var(--bg)] border-b border-[var(--container-medium)] px-6 h-16 flex items-center">
           <div className="w-full flex items-center justify-between">
-            {/* Mobile Burger Menu (only on mobile) */}
-            <button
-              onClick={toggleNav}
-              className="lg:hidden p-2 rounded-lg hover:bg-[var(--container-medium)] transition-colors"
-              aria-label="Toggle navigation"
-            >
-              <svg className="w-6 h-6 text-[var(--text-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
+            {/* Left side: Mobile Menu + Page Title */}
+            <div className="flex items-center gap-3">
+              {/* Mobile Burger Menu (only on mobile) */}
+              <button
+                onClick={toggleNav}
+                className="lg:hidden p-2 rounded-lg hover:bg-[var(--container-medium)] transition-colors"
+                aria-label="Toggle navigation"
+              >
+                <svg className="w-6 h-6 text-[var(--text-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
 
-            {/* Spacer for desktop (no burger menu) */}
-            <div className="hidden lg:block" />
+              {/* Page Title */}
+              {title && (
+                <h1 className="text-[20px] font-medium text-[var(--text-primary)]">
+                  {title}
+                </h1>
+              )}
+            </div>
 
-            {/* Theme Toggle */}
-            <div className="relative">
+            {/* Right side content */}
+            <div className="flex items-center gap-4">
+              {headerRight}
               <ThemeToggle fixed={false} />
             </div>
           </div>

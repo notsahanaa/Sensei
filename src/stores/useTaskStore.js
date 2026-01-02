@@ -57,7 +57,7 @@ export const useTaskStore = create((set, get) => ({
     }
   },
 
-  // Create task instance directly in database
+  // Create task instance with edge function (canonical grouping) and fallback
   createTask: async (taskData) => {
     try {
       // Get authenticated user
@@ -66,6 +66,60 @@ export const useTaskStore = create((set, get) => ({
       if (userError || !user) {
         throw new Error('User not authenticated')
       }
+
+      // Try edge function first (with canonical task grouping via Gemini)
+      try {
+        console.log('🔵 Attempting to call edge function...')
+        const { data: edgeFunctionResult, error: edgeFunctionError } = await supabase.functions.invoke('create-task', {
+          body: {
+            taskName: taskData.taskName,
+            description: taskData.description || null,
+            notes: taskData.notes || null,
+            projectId: taskData.projectId,
+            domainId: taskData.domainId,
+            version: taskData.version || null,
+            measureType: taskData.measureType || null,
+            measureUnit: taskData.measureUnit || null,
+            targetValue: taskData.targetValue || null,
+            timeboxValue: taskData.timeboxValue || null,
+            timeboxUnit: taskData.timeboxUnit || null,
+            scheduledDate: taskData.scheduledDate || null,
+          }
+        })
+
+        console.log('🔍 Edge function response:', { edgeFunctionResult, edgeFunctionError })
+
+        // Log the full error details
+        if (edgeFunctionError) {
+          console.error('❌ Edge function error details:', {
+            message: edgeFunctionError.message,
+            context: edgeFunctionError.context,
+            details: edgeFunctionResult
+          })
+        }
+
+        if (edgeFunctionResult?.data && !edgeFunctionError) {
+          console.log('✅ Task created via edge function with canonical grouping')
+          console.log('📋 Task data:', edgeFunctionResult.data)
+
+          // Optimistic update: add to local state
+          set((state) => ({
+            tasks: [edgeFunctionResult.data, ...state.tasks]
+          }))
+
+          return { success: true, data: edgeFunctionResult.data, method: 'edge-function' }
+        }
+
+        // Edge function returned error, fall through to fallback
+        console.warn('⚠️ Edge function returned error, using fallback:', edgeFunctionError)
+      } catch (edgeFunctionException) {
+        // Edge function threw exception, fall through to fallback
+        console.error('❌ Edge function failed with exception:', edgeFunctionException)
+        console.warn('⚠️ Using direct insert fallback')
+      }
+
+      // FALLBACK: Direct insert without canonical grouping
+      console.log('⚠️ Using direct insert fallback (no canonical grouping)')
 
       const { data, error } = await supabase
         .from('task_instances')
@@ -83,7 +137,8 @@ export const useTaskStore = create((set, get) => ({
           timebox_value: taskData.timeboxValue || null,
           timebox_unit: taskData.timeboxUnit || null,
           scheduled_date: taskData.scheduledDate || null,
-          status: 'pending'
+          status: 'pending',
+          canonical_task_id: null // Explicitly set to null for fallback
         })
         .select(`
           *,
@@ -98,7 +153,7 @@ export const useTaskStore = create((set, get) => ({
         tasks: [data, ...state.tasks]
       }))
 
-      return { success: true, data }
+      return { success: true, data, method: 'direct-insert-fallback' }
     } catch (error) {
       console.error('Error creating task:', error)
       return { success: false, error: error.message || 'Failed to create task' }

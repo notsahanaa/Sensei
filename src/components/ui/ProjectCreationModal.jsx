@@ -55,7 +55,7 @@ const ProjectCreationModal = ({ isOpen, onClose, onComplete }) => {
   const currentDomains = domains.length > 0 ? domains : PROJECT_TYPE_DOMAINS[projectType] || []
 
   // Check if domains should be shown
-  const shouldShowDomains = domainsUnlocked || (projectName.trim() && projectSummary.trim())
+  const shouldShowDomains = domainsUnlocked
 
   const handleDragStart = (index) => {
     setDraggedIndex(index)
@@ -182,12 +182,12 @@ const ProjectCreationModal = ({ isOpen, onClose, onComplete }) => {
     }
   }
 
-  // Unlock domains once both name and summary are filled
-  useEffect(() => {
-    if (projectName.trim() && projectSummary.trim() && !domainsUnlocked) {
+  // Unlock domains when user finishes typing project name
+  const handleProjectNameComplete = () => {
+    if (projectName.trim() && !domainsUnlocked) {
       setDomainsUnlocked(true)
     }
-  }, [projectName, projectSummary, domainsUnlocked])
+  }
 
   // Reset modal when it opens
   useEffect(() => {
@@ -215,8 +215,17 @@ const ProjectCreationModal = ({ isOpen, onClose, onComplete }) => {
                 const value = e.target.value
                 setProjectName(value.charAt(0).toUpperCase() + value.slice(1))
               }}
-              onBlur={handleAutosave}
-              onKeyDown={handleKeyDown}
+              onBlur={() => {
+                handleAutosave()
+                handleProjectNameComplete()
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.target.blur()
+                  handleAutosave()
+                  handleProjectNameComplete()
+                }
+              }}
               placeholder="Add Project Name…"
               className="flex-1 text-[24px] font-medium text-[var(--text-primary)] bg-transparent border-none outline-none placeholder:text-[var(--text-secondary)]"
               autoFocus
@@ -400,7 +409,7 @@ const ProjectCreationModal = ({ isOpen, onClose, onComplete }) => {
               <Button
                 onClick={handleCreateProject}
                 variant="primary"
-                disabled={!projectName.trim() || !projectSummary.trim() || isSaving}
+                disabled={!projectName.trim() || isSaving}
                 loading={isSaving}
               >
                 {isSaving ? 'Creating...' : 'Create Project'}

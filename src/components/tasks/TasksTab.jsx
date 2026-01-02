@@ -7,6 +7,7 @@ import TaskCard from './TaskCard'
 import TaskDetailModal from './TaskDetailModal'
 import CheckInModal from './CheckInModal'
 import { useTaskStore } from '../../stores/useTaskStore'
+import { formatLocalDate } from '../../utils/dateUtils'
 
 // Custom input component for DatePicker (calendar icon button)
 const CalendarButton = forwardRef(({ value, onClick }, ref) => (
@@ -33,7 +34,7 @@ const TasksTab = ({ projectId, domains = [], projects = [] }) => {
   // Fetch tasks when date or project changes
   useEffect(() => {
     if (projectId && selectedDate) {
-      const dateStr = selectedDate.toISOString().split('T')[0]
+      const dateStr = formatLocalDate(selectedDate)
       fetchTasksForDate(projectId, dateStr)
     }
   }, [projectId, selectedDate, fetchTasksForDate])
@@ -205,7 +206,7 @@ const TasksTab = ({ projectId, domains = [], projects = [] }) => {
                   onCancel={handleCancelAddTask}
                   domains={domains}
                   projectId={projectId}
-                  scheduledDate={selectedDate.toISOString().split('T')[0]}
+                  scheduledDate={formatLocalDate(selectedDate)}
                 />
               ) : (
                 <button

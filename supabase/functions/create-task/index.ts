@@ -207,8 +207,6 @@ serve(async (req) => {
           canonical_name: taskName.trim(),
           description: description || null,
           version: version || null,
-          measure_type: measureType || null,
-          measure_unit: measureUnit || null,
         })
         .select()
         .single()
@@ -235,6 +233,9 @@ serve(async (req) => {
         task_name: taskName,
         description: description || null,
         notes: notes || null,
+        version: version || null,
+        measure_type: measureType || null,
+        measure_unit: measureUnit || null,
         scheduled_date: scheduledDate || null,
         target_value: targetValue || null,
         timebox_value: timeboxValue || null,
@@ -244,7 +245,7 @@ serve(async (req) => {
       .select(`
         *,
         domain:domains(id, name),
-        canonical_task:canonical_tasks(id, canonical_name, version, measure_type, measure_unit)
+        canonical_task:canonical_tasks(id, canonical_name, version)
       `)
       .single()
 
